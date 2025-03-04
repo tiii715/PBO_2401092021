@@ -15,7 +15,8 @@ public class OperatorKondisi {
     int grade = 80; 
  
     //mendapatkan status pelajar 
-    status = (grade >= 60)?"Passed":"Fail"; 
+    status = (grade >= 60)?"Passed":"Fail";
+    
     //print status 
     System.out.println( status ); 
     }

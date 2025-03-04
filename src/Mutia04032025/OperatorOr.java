@@ -11,8 +11,8 @@ package Mutia04032025;
 public class OperatorOr {
     public static void main( String[] args ){ 
  	 	 
-    int  i  = 0;  	 	
-    int  j  = 10; 
+    int  i= 0;  	 	
+    int  j= 10; 
     boolean test= false; 
  	 	 	 
     //demonstrasi || 

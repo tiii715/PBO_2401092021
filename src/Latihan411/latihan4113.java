@@ -9,8 +9,7 @@ package Latihan411;
  * @author user
  */
 public class latihan4113 {
-    public static void main(String[] args){
-        
+    public static void main(String[] args){  
     int i = 10; 
     int j = 23;
     int k = 5;

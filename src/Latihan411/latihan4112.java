@@ -9,18 +9,16 @@ package Latihan411;
  */
 public class latihan4112 {
     public static void main(String[] args){
-        
-    int n1 = 10;
-    int n2 = 20;
-    int n3 = 45;
+ 
+    int a = 10;
+    int b = 20;
+    int c = 45;
     int Average = 25;
-    Average = (n1 + n2 + n3)/3;
+    Average = (a + b + c)/3;
     
-    System.out.println("number 1 = " + n1);
-    System.out.println("number 2 = " + n2);
-    System.out.println("number 3 = " + n3);
+    System.out.println("number 1 = " + a);
+    System.out.println("number 2 = " + b);
+    System.out.println("number 3 = " + c);
     System.out.println("Average = " + Average);
-    
     }
-    
 }
