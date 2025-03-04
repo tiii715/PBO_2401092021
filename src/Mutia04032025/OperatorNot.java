@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Latihan411;
+package Mutia04032025;
 
 /**
  *
  * @author user
  */
-public class latihan4114 {
-    public static void main(String [] args){
-        
-    /**(((a/b) ^c) ^d) - e+f - (g*h) + i;
-    (((3*10) *2) /15) -2 +((4^2)^2);
-    (((r^s) *t) /u) -v +(w^x) -y++; */
+public class OperatorNot {
+    public static void main( String[] args ){ 
+ 	 	 
+    boolean val1 = true;  	 	
+    boolean val2 = false;  	 	
+    System.out.println(!val1); 
+    System.out.println(!val2); 
     }
-    
 }

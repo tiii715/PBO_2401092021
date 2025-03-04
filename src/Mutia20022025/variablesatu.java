@@ -12,21 +12,22 @@ package Mutia20022025;
  */
 public class variablesatu {
     public static void main(String[] args){
-        //deklarasi a tipe data dengan nama variable
-        // result dan type data boolean 
-        boolean result;       
         
-        //deklarasi type data dengan nama variable
-        // option dan type data char
-        char option;
-        option = 'C';   //menandai 'C' sebagai option
-        System.out.println(option);
+    //deklarasi a tipe data dengan nama variable
+    // result dan type data boolean 
+    boolean result;       
         
-        //deklarasi type data dengan nama variable
-        //grade, double type data dan telah di inisialisasi
-        //to 0.0
-        double grade = 0.0;
-        System.out.println(grade);
+    //deklarasi type data dengan nama variable
+    // option dan type data char
+    char option;
+    option = 'C';   //menandai 'C' sebagai option
+    System.out.println(option);
+        
+    //deklarasi type data dengan nama variable
+    //grade, double type data dan telah di inisialisasi
+    //to 0.0
+    double grade = 0.0;
+    System.out.println(grade);
     }
    
 }

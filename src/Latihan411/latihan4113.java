@@ -18,8 +18,5 @@ public class latihan4113 {
     
     nmax = (i>j)?((i>k)?i:k):((j>k)?j:k);
     System.out.println("nilai tertinggi= " + nmax);
-    
-    
-    
     }
 }

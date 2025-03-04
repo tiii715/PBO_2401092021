@@ -12,6 +12,7 @@ package Mutia20022025;
  */
 public class Aritmatikasatu {
     public static void main(String [] args){
+        
     //sedikit angka
         int i = 37;
         int j =42;
@@ -33,5 +34,6 @@ public class Aritmatikasatu {
         System.out.println("Adding...");
         System.out.println("i - j = " + (i - j));
         System.out.println("x - y = " + (x - y));
+        
     }
 }

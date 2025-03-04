@@ -8,7 +8,7 @@ package Mutia04032025;
  *
  * @author user
  */
-public class OperatoeAnd {
+public class OperatorAnd {
     public static void main( String[] args ){ 
  
     int i = 0; 

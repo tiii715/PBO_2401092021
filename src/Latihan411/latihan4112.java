@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Latihan411;
-
 /**
  *
  * @author user
@@ -21,5 +20,7 @@ public class latihan4112 {
     System.out.println("number 2 = " + n2);
     System.out.println("number 3 = " + n3);
     System.out.println("Average = " + Average);
+    
     }
+    
 }
