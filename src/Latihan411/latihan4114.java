@@ -11,16 +11,8 @@ package Latihan411;
 public class latihan4114 {
     public static void main(String [] args){
         
-    double x = a/b ^ c ^ d - e+f - g*h + i;
-    System.out.println("result= " + x);//concatenation
+    // (((a/b) ^c) ^d) - e+f - (g*h) + i;
+    // (((3*10) *2) /15) -2 +((4^2)^2);
+    // (((r^s) *t) /u) -v +(w^x) -y++;
     }
-    
 }
-//step 1. a/b
-//step 2. a/b^c
-//step 3. a/b^c^d
-//step 4. a/b^c^d-e
-//step 5. a/b^c^d-e+f
-//step 6. g*h
-//step 7. a/b^c^d-e+f-g*h
-//step 8. a/b^c^d-e+f-g*h+i
