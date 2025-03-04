@@ -9,7 +9,7 @@ package Latihan411;
  */
 public class latihan4112 {
     public static void main(String[] args){
- 
+        
     int a = 10;
     int b = 20;
     int c = 45;
