@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
  *
  * @author user
  */
-public class latihan6511 {
+public class latihan65111 {
     public static void main (String [] args){
     BufferedReader dataIn = new BufferedReader(new InputStreamReader( System.in));
     String nilai1= "";
