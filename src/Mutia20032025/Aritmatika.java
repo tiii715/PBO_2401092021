@@ -6,7 +6,7 @@ package Mutia20032025;
 import java.io.*;
 /**
  *
- * @author Suga
+ * @author user
  */
 public class Aritmatika {
     public static void main(String[] args) throws IOException{

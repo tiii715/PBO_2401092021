@@ -93,7 +93,7 @@ public class Latihan10102Menu {
     }
     System.out.println("Data Telah Berhasil dimasukan");
     break;
-//AKHIR prosedur memasukan
+
 case 2:
     System.out.println("Menghapus Data");
     System.out.print("Input No Siswa yang Akan Dihapus: Input [1-"+jumlah+"]: ");
@@ -105,6 +105,7 @@ case 2:
     no=Integer.parseInt(n);
     System.out.println("Ditemukan Data ke- "+no);
     no=no-1;
+    
     namaRecord.setName(nama[no],no,alamat[no],telp[no],email[no]);
     System.out.println("===========================================");
     System.out.println("Nama                  :"+namaRecord.getName(no) );
@@ -125,6 +126,7 @@ case 2:
         alamat[no]="";
         telp[no]="";
         email[no]="";
+        
     namaRecord.setName(nama[no],no,alamat[no],telp[no],email[no]);
     System.out.println("===========================================");
     System.out.println("Nama                  :"+namaRecord.getName(no) );
@@ -135,6 +137,7 @@ case 2:
         System.out.println("Data Berhasil Dihapus");
     }
     break;
+    
 case 3:
         System.out.println("DAFTAR SEMUA DATA SISWA");
         System.out.println("===========================================");
@@ -216,5 +219,25 @@ default:
                 System.out.println("inputTidakValid");
             }
         } while (Integer.parseInt(PIL) != 5);
+    }
+
+    private void setName(String string, int i, String string0, String string1, String string2) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private String getName(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private String getAlamat(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private String getTelpon(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private String getEmail(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
