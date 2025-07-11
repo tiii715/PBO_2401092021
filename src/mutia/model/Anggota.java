@@ -7,7 +7,7 @@ package mutia.model;
 
 /**
  *
- * @author LABSIDOSEN
+ * @author User
  */
 public class Anggota {
     private String kode;

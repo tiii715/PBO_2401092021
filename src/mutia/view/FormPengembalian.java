@@ -7,11 +7,12 @@ package mutia.view;
 
 import mutia.controller.PengembalianController;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
  *
- * @author LABSIDOSEN
+ * @author User
  */
 public class FormPengembalian extends javax.swing.JFrame {
 
@@ -22,35 +23,43 @@ public class FormPengembalian extends javax.swing.JFrame {
     public FormPengembalian() {
         initComponents();
         controller = new PengembalianController(this);
-        controller.bersihForm();
+        controller.clearScreen();
+    }
+    
+    public JTextField getFieldId() {
+        return TxtID;
     }
 
-    public JComboBox<String> getCboAnggota() {
-        return cboAnggota;
+    public JComboBox<String> getOptionKodeAnggota() {
+        return optionKodeAnggota;
     }
 
-    public JComboBox<String> getCboBuku() {
-        return cboBuku;
+    public JComboBox<String> getOptionKodeBuku() {
+        return optionKodeBuku;
     }
 
-    public JTextField getTxtDenda() {
+    public JTextField getFieldDenda() {
         return txtDenda;
     }
 
-    public JTextField getTxtTerlambat() {
+    public JTextField getFieldTerlambat() {
         return txtTerlambat;
     }
 
-    public JTextField getTxtTglDikembalikan() {
-        return txtTglDikembalikan;
-    }
-
-    public JTextField getTxtTglKembali() {
+    public JTextField getFieldTglKembali() {
         return txtTglKembali;
     }
 
-    public JTextField getTxtTglPinjam() {
+    public JTextField getFieldTglPinjam() {
         return txtTglPinjam;
+    }
+
+    public JTextField getFieldTgldikembalikan() {
+        return txtTglDikembalikan;
+    }
+
+    public JTable getTabelPengembalian() {
+        return Pengembalian;
     }
 
     
@@ -64,9 +73,9 @@ public class FormPengembalian extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        cboAnggota = new javax.swing.JComboBox<>();
+        optionKodeAnggota = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        cboBuku = new javax.swing.JComboBox<>();
+        optionKodeBuku = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         txtTglPinjam = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -77,86 +86,108 @@ public class FormPengembalian extends javax.swing.JFrame {
         txtTerlambat = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtDenda = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnInsert = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        Pengembalian = new javax.swing.JTable();
+        btnCari = new javax.swing.JButton();
+        btnProses = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        btnCariID = new javax.swing.JButton();
+        TxtID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jLabel1.setText("Kode Anggota");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 20, 100, 16);
+        jLabel1.setBounds(60, 100, 100, 16);
 
-        cboAnggota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cboAnggota);
-        cboAnggota.setBounds(150, 20, 370, 30);
+        optionKodeAnggota.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        optionKodeAnggota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionKodeAnggotaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(optionKodeAnggota);
+        optionKodeAnggota.setBounds(170, 90, 410, 30);
 
         jLabel2.setText("Buku");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 50, 120, 16);
+        jLabel2.setBounds(60, 140, 120, 16);
 
-        cboBuku.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(cboBuku);
-        cboBuku.setBounds(150, 50, 370, 30);
+        optionKodeBuku.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(optionKodeBuku);
+        optionKodeBuku.setBounds(170, 130, 410, 30);
 
         jLabel3.setText("Tgl Pinjam");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 80, 110, 16);
-
-        txtTglPinjam.setText("jTextField1");
+        jLabel3.setBounds(60, 180, 110, 16);
         getContentPane().add(txtTglPinjam);
-        txtTglPinjam.setBounds(150, 80, 370, 30);
+        txtTglPinjam.setBounds(170, 170, 110, 30);
 
         jLabel4.setText("Tgl Kembali");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 110, 130, 16);
+        jLabel4.setBounds(290, 180, 80, 16);
 
         txtTglKembali.setText("jTextField2");
+        txtTglKembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTglKembaliActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtTglKembali);
-        txtTglKembali.setBounds(150, 110, 370, 30);
+        txtTglKembali.setBounds(380, 170, 110, 30);
 
         jLabel5.setText("Tgl Dikembalikan");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(20, 140, 120, 16);
-
-        txtTglDikembalikan.setText("jTextField3");
+        jLabel5.setBounds(60, 220, 120, 16);
         getContentPane().add(txtTglDikembalikan);
-        txtTglDikembalikan.setBounds(150, 140, 370, 30);
+        txtTglDikembalikan.setBounds(170, 210, 320, 30);
 
         jLabel6.setText("Terlambat");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(20, 170, 110, 16);
-
-        txtTerlambat.setText("jTextField4");
+        jLabel6.setBounds(60, 260, 110, 16);
         getContentPane().add(txtTerlambat);
-        txtTerlambat.setBounds(150, 170, 370, 30);
+        txtTerlambat.setBounds(170, 250, 160, 30);
 
         jLabel7.setText("Denda");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(20, 200, 120, 16);
-
-        txtDenda.setText("jTextField5");
+        jLabel7.setBounds(340, 260, 50, 16);
         getContentPane().add(txtDenda);
-        txtDenda.setBounds(150, 200, 370, 30);
+        txtDenda.setBounds(400, 250, 180, 30);
 
-        jButton1.setText("insert");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(20, 250, 90, 30);
+        btnInsert.setText("insert");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnInsert);
+        btnInsert.setBounds(60, 300, 90, 30);
 
-        jButton2.setText("jButton2");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(130, 250, 90, 30);
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDelete);
+        btnDelete.setBounds(170, 300, 90, 30);
 
-        jButton3.setText("jButton3");
-        getContentPane().add(jButton3);
-        jButton3.setBounds(240, 250, 90, 30);
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnUpdate);
+        btnUpdate.setBounds(280, 300, 90, 30);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Pengembalian.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -175,42 +206,116 @@ public class FormPengembalian extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Pengembalian);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 292, 600, 330);
+        jScrollPane1.setBounds(20, 340, 600, 230);
 
-        jButton4.setText("Cari");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnCari.setText("Cari");
+        btnCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnCariActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(530, 80, 80, 30);
+        getContentPane().add(btnCari);
+        btnCari.setBounds(500, 170, 80, 30);
 
-        jButton5.setText("Proses");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnProses.setText("Proses");
+        btnProses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnProsesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5);
-        jButton5.setBounds(530, 140, 80, 30);
+        getContentPane().add(btnProses);
+        btnProses.setBounds(500, 210, 80, 30);
 
-        setSize(new java.awt.Dimension(658, 677));
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReset);
+        btnReset.setBounds(390, 300, 80, 30);
+
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnExit);
+        btnExit.setBounds(490, 300, 80, 30);
+
+        jLabel8.setText("ID");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(60, 60, 90, 16);
+
+        btnCariID.setText("Cari Data Pengembalian");
+        btnCariID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariIDActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCariID);
+        btnCariID.setBounds(410, 50, 170, 30);
+        getContentPane().add(TxtID);
+        TxtID.setBounds(170, 50, 230, 30);
+
+        setSize(new java.awt.Dimension(658, 588));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         // TODO add your handling code here:
         controller.searchPinjam();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnCariActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnProsesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProsesActionPerformed
         // TODO add your handling code here:
         controller.proses();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnProsesActionPerformed
+
+    private void optionKodeAnggotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionKodeAnggotaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_optionKodeAnggotaActionPerformed
+
+    private void txtTglKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTglKembaliActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTglKembaliActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        // TODO add your handling code here:
+        controller.insert();
+        controller.clearScreen();
+        controller.viewData();
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        controller.delete();
+        controller.clearScreen();
+        controller.viewData();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        controller.clearScreen();
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnCariIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariIDActionPerformed
+        // TODO add your handling code here:
+        controller.searchPengembalian();
+    }//GEN-LAST:event_btnCariIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,13 +353,16 @@ public class FormPengembalian extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cboAnggota;
-    private javax.swing.JComboBox<String> cboBuku;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JTable Pengembalian;
+    private javax.swing.JTextField TxtID;
+    private javax.swing.JButton btnCari;
+    private javax.swing.JButton btnCariID;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnInsert;
+    private javax.swing.JButton btnProses;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -262,8 +370,10 @@ public class FormPengembalian extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> optionKodeAnggota;
+    private javax.swing.JComboBox<String> optionKodeBuku;
     private javax.swing.JTextField txtDenda;
     private javax.swing.JTextField txtTerlambat;
     private javax.swing.JTextField txtTglDikembalikan;

@@ -7,9 +7,10 @@ package mutia.model;
 
 /**
  *
- * @author LABSIDOSEN
+ * @author User
  */
 public class Pengembalian {
+    private int id;
     private Peminjaman tglpinjam;
     private String tglDikembalikan;
     private int terlambat;
@@ -18,11 +19,19 @@ public class Pengembalian {
     public Pengembalian() {
     }
 
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public Peminjaman getPeminjaman() {
         return tglpinjam;
     }
 
-    public void setPeminjaman(Peminjaman peminjaman) {
+    public void setTglPinjam(Peminjaman peminjaman) {
         this.tglpinjam = peminjaman;
     }
 

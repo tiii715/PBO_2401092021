@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  *
- * @author LABSIDOSEN
+ * @author User
  */
 public class PengembalianDao {
 
@@ -34,14 +34,34 @@ public class PengembalianDao {
         ps.executeUpdate();
     }
     
-    public Pengembalian get(String kodeanggota, 
-            String kodebuku, String tglpinjam) throws Exception {
+    public void update(Pengembalian pengembalian) throws Exception{
+        java.sql.Connection con = new Koneksi().getKoneksi();
+        String sql = "update pengembalian set tgl_dikembalikan=?, terlambat=?, denda=? where id_pengembalian=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, pengembalian.getTgldikembalikan());
+        ps.setInt(2, pengembalian.getTerlambat());
+        ps.setLong(3, pengembalian.getDenda());
+        
+        
+        ps.executeUpdate();
+    }
+    
+    public void delete(Pengembalian pengembalian) throws Exception {
+        java.sql.Connection con = new Koneksi().getKoneksi();
+        String sql = "delete from pengembalian where id_pengembalian=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        
+
+        ps.executeUpdate();
+    }
+    
+    public Pengembalian getPengembalian(java.lang.String tglpinjam) throws Exception {
         Connection con = new Koneksi().getKoneksi();
         String sql = "select * from pengembalian "
        + "where kodeanggota = ? and kodebuku = ? and tglpinjam = ?";
         PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, kodeanggota);
-        ps.setString(2, kodebuku);
+        ps.setString(1, tglpinjam);
+        ps.setString(2, tglpinjam);
         ps.setString(3, tglpinjam);
         ResultSet rs = ps.executeQuery();
         Pengembalian pengembalian = null;
@@ -50,8 +70,8 @@ public class PengembalianDao {
         PeminjamanDao peminjamanDao = new PeminjamanDao();
         if (rs.next()) {
             pengembalian = new Pengembalian();
-            Peminjaman peminjaman = peminjamanDao.getPeminjaman(kodeanggota, kodebuku, tglpinjam);
-            pengembalian.setPeminjaman(peminjaman);
+            Peminjaman peminjaman = peminjamanDao.getPeminjaman(tglpinjam, tglpinjam, tglpinjam);
+            pengembalian.setTglPinjam(peminjaman);
             pengembalian.setTgldikembalikan(rs.getString(4));
             pengembalian.setTerlambat(rs.getInt(5));
             pengembalian.setDenda(rs.getInt(6));
@@ -70,7 +90,7 @@ public class PengembalianDao {
         while (rs.next()) {
             pengembalian = new Pengembalian();
             Peminjaman peminjaman = peminjamanDao.getPeminjaman(rs.getString(1), rs.getString(2), rs.getString(3));
-            pengembalian.setPeminjaman(peminjaman);
+            pengembalian.setTglPinjam(peminjaman);
             pengembalian.setTgldikembalikan(rs.getString(4));
             pengembalian.setTerlambat(rs.getInt(5));
             pengembalian.setDenda(rs.getInt(6));
@@ -90,5 +110,9 @@ public class PengembalianDao {
             return rs.getInt(1);
         }
         return 0;
+    }
+
+    public Pengembalian getPengembalian(int idPengembalian) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

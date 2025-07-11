@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author LABSIDOSEN
+ * @author User
  */
 public class FormAnggota extends javax.swing.JFrame {
 
@@ -80,7 +80,7 @@ public class FormAnggota extends javax.swing.JFrame {
 
         jLabel1.setText("Alamat");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 80, 120, 16);
+        jLabel1.setBounds(20, 110, 120, 16);
 
         txtKode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,23 +92,23 @@ public class FormAnggota extends javax.swing.JFrame {
 
         jLabel2.setText("Kode Anggota");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(20, 20, 120, 16);
+        jLabel2.setBounds(20, 30, 120, 16);
         getContentPane().add(txtNama);
-        txtNama.setBounds(150, 50, 390, 30);
+        txtNama.setBounds(150, 60, 390, 30);
 
         jLabel3.setText("Nama");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(20, 50, 120, 16);
+        jLabel3.setBounds(20, 70, 120, 16);
         getContentPane().add(txtAlamat);
-        txtAlamat.setBounds(150, 80, 390, 30);
+        txtAlamat.setBounds(150, 100, 390, 30);
 
         jLabel4.setText("Jenis Kelamin");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 110, 110, 16);
+        jLabel4.setBounds(20, 150, 110, 16);
 
         cboJekel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cboJekel);
-        cboJekel.setBounds(150, 110, 390, 30);
+        cboJekel.setBounds(150, 140, 390, 30);
 
         btnCari.setText("Cari");
         btnCari.addActionListener(new java.awt.event.ActionListener() {
@@ -126,11 +126,11 @@ public class FormAnggota extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnInsert);
-        btnInsert.setBounds(50, 150, 80, 30);
+        btnInsert.setBounds(60, 200, 80, 30);
 
         btnUpdate.setText("Update");
         getContentPane().add(btnUpdate);
-        btnUpdate.setBounds(140, 150, 80, 30);
+        btnUpdate.setBounds(150, 200, 80, 30);
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +139,7 @@ public class FormAnggota extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDelete);
-        btnDelete.setBounds(230, 150, 80, 30);
+        btnDelete.setBounds(240, 200, 80, 30);
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +148,7 @@ public class FormAnggota extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCancel);
-        btnCancel.setBounds(320, 150, 80, 30);
+        btnCancel.setBounds(330, 200, 80, 30);
 
         btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +157,7 @@ public class FormAnggota extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnExit);
-        btnExit.setBounds(410, 150, 90, 30);
+        btnExit.setBounds(420, 200, 90, 30);
 
         tblAnggota.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,9 +170,16 @@ public class FormAnggota extends javax.swing.JFrame {
                 "Kode", "Nama", "Alamat", "Jekel"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -181,9 +188,9 @@ public class FormAnggota extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblAnggota);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 192, 520, 290);
+        jScrollPane1.setBounds(20, 240, 520, 290);
 
-        setSize(new java.awt.Dimension(578, 535));
+        setSize(new java.awt.Dimension(578, 576));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

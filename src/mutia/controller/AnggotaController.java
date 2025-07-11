@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package mutia.controller;
 
@@ -33,66 +32,84 @@ public class AnggotaController {
         formAnggota.getTxtKode().setText("");
         formAnggota.getTxtNama().setText("");
         formAnggota.getTxtAlamat().setText("");
-        isiCombo();
+        fieldOption();
     }
 
-    private void isiCombo() {
+    private void fieldOption() {
         formAnggota.getCboJekel().removeAllItems();
+        formAnggota.getCboJekel().addItem("-- Select Gender --");
         formAnggota.getCboJekel().addItem("L");
         formAnggota.getCboJekel().addItem("P");
     }
 
-    public void search() {
+    public void insert(){
+        anggota = new Anggota();
+        anggota.setKode(formAnggota.getTxtKode().getText());
+        anggota.setNama(formAnggota.getTxtNama().getText());
+        anggota.setJekel(formAnggota.getCboJekel().getSelectedItem().toString());
+        anggota.setAlamat(formAnggota.getTxtAlamat().getText());
+        
+        try{
+            dao.insert(anggota);
+            JOptionPane.showMessageDialog(formAnggota, "Entry Data Ok!");
+        }catch (Exception Ex){
+            JOptionPane.showMessageDialog(formAnggota, Ex.getMessage());
+            Logger.getLogger(AnggotaController.class.getName()).log(Level.SEVERE, null, Ex);
+        }
+    }
+    
+    public void update(){
+        anggota = new Anggota();
+        anggota.setNama(formAnggota.getTxtNama().getText());
+        anggota.setJekel(formAnggota.getCboJekel().getSelectedItem().toString());
+        anggota.setAlamat(formAnggota.getTxtAlamat().getText());
+        anggota.setKode(formAnggota.getTxtKode().getText());
+        
+        try{
+            dao.Update(anggota);
+            JOptionPane.showMessageDialog(formAnggota, "Update Data Ok!");
+        }catch (Exception Ex){
+            JOptionPane.showMessageDialog(formAnggota, Ex.getMessage());
+            Logger.getLogger(AnggotaController.class.getName()).log(Level.SEVERE, null, Ex);
+        }
+    }
+    
+    public void search(){
         try {
             String kode = formAnggota.getTxtKode().getText();
             anggota = dao.getAnggota(kode);
-            if (anggota != null) {
+            
+            if (anggota != null){
                 formAnggota.getTxtNama().setText(anggota.getNama());
                 formAnggota.getTxtAlamat().setText(anggota.getAlamat());
-                formAnggota.getCboJekel().setSelectedItem(
-                        anggota.getJekel());
-            } else {
-                JOptionPane.showMessageDialog(formAnggota, "Data Tidak ada");
+                formAnggota.getCboJekel().setSelectedItem(anggota.getJekel());
+            }else{
+                JOptionPane.showMessageDialog(formAnggota, "Data not found!");
             }
         } catch (Exception ex) {
             Logger.getLogger(AnggotaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void delete() {
+    public void delete(){
         try {
-            if(anggota!=null) {
-                dao.delete(anggota);
-                JOptionPane.showMessageDialog(formAnggota, "Delete Ok");
+            if(anggota!=null){   
+                dao.Delete(anggota);
             }else{
-                JOptionPane.showMessageDialog(
-                        formAnggota, "Data Tidak ada");
+                JOptionPane.showMessageDialog(formAnggota, "Data Not Found");
             }
+            
         } catch (Exception ex) {
             Logger.getLogger(AnggotaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void insert() {
-        anggota = new Anggota();
-        anggota.setKode(formAnggota.getTxtKode().getText());
-        anggota.setNama(formAnggota.getTxtNama().getText());
-        anggota.setAlamat(formAnggota.getTxtAlamat().getText());
-        anggota.setJekel(formAnggota.getCboJekel()
-                .getSelectedItem().toString());
-        try {
-            dao.insert(anggota);
-            JOptionPane.showMessageDialog(formAnggota, "Entri Data Ok");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(formAnggota, ex.getMessage());
-            Logger.getLogger(AnggotaController.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        }
-    }
-
+    
     public void viewData() {
+        
         try {
-            DefaultTableModel model = (DefaultTableModel) formAnggota.getTblAnggota().getModel();
+            DefaultTableModel model = (DefaultTableModel)
+                    formAnggota.getTblAnggota().getModel();
+            
             model.setNumRows(0);
             List<Anggota> list = dao.getAllAnggota();
             for (Anggota anggota : list) {
@@ -100,7 +117,8 @@ public class AnggotaController {
                     anggota.getKode(),
                     anggota.getNama(),
                     anggota.getAlamat(),
-                    anggota.getJekel(),};
+                    anggota.getJekel(),
+                };
                 model.addRow(data);
             }
         } catch (Exception ex) {

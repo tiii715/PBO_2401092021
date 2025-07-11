@@ -9,24 +9,32 @@ import mutia.model.Anggota;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author LABSIDOSEN
+ * @author User
  */
 public class AnggotaDao {
 
     public void insert(Anggota anggota) throws Exception{
-        Connection con = new Koneksi().getKoneksi();
         String sql = "insert into anggota values(?,?,?,?)";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, anggota.getKode());
-        ps.setString(1, anggota.getNama());
-        ps.setString(1, anggota.getAlamat() );
-        ps.setString(1, anggota.getJekel());
-        ps.executeUpdate();
+        try (
+                Connection con = new Koneksi().getKoneksi();
+                PreparedStatement ps = con.prepareStatement(sql);
+                ) {
+            ps.setString(1, anggota.getKode());
+            ps.setString(2, anggota.getNama());
+            ps.setString(3, anggota.getAlamat() );
+            ps.setString(4, anggota.getJekel());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
     }
 
     public void Update(Anggota anggota) throws Exception{
@@ -81,8 +89,9 @@ public class AnggotaDao {
         }
         return aglist;
     }
-    
-    public void delete(Anggota anggota) {
+
+    public List<Anggota> getAllAnggota() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
     }
 }

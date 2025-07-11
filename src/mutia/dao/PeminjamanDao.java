@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author LABSIDOSEN
+ * @author User
  */
 public class PeminjamanDao {
 
@@ -30,6 +30,30 @@ public class PeminjamanDao {
         ps.setString(4, peminjaman.getTglkembali());
         ps.executeUpdate();
     }
+    
+    public void Update(Peminjaman peminjaman) throws Exception{
+        java.sql.Connection con = new Koneksi().getKoneksi();
+        String sql = "update peminjaman set tgl_kembali=? where kode_anggota=? and kode_buku=? and tgl_pinjam=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, peminjaman.getTglkembali());
+        ps.setString(2, peminjaman.getAnggota().getKode());
+        ps.setString(3, peminjaman.getBuku().getKode());
+        ps.setString(4, peminjaman.getTglpinjam());
+        
+        ps.executeUpdate();
+    }
+
+    public void Delete(Peminjaman peminjaman) throws Exception {
+        java.sql.Connection con = new Koneksi().getKoneksi();
+        String sql = "delete from peminjaman where kode_anggota=?  and kode_buku=? and tgl_pinjam=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, peminjaman.getAnggota().getKode());
+        ps.setString(2, peminjaman.getBuku().getKode());
+        ps.setString(3, peminjaman.getTglpinjam());
+
+        ps.executeUpdate();
+    }
+
     
     public Peminjaman getPeminjaman(String kodeanggota, 
             String kodebuku, String tglpinjam) throws Exception {
@@ -56,7 +80,7 @@ public class PeminjamanDao {
         return peminjaman;
     }
 
-    public List<Peminjaman> getAll() throws Exception {
+    public List<Peminjaman> getAllPeminjaman() throws Exception {
         Connection con = new Koneksi().getKoneksi();
         String sql = "select * from peminjaman";
         PreparedStatement ps = con.prepareStatement(sql);

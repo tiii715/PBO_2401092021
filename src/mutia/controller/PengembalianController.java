@@ -18,57 +18,146 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author User
  */
 public class PengembalianController {
+    
+private FormPengembalian formPengembalian;
+    private Pengembalian pengembalian;
+    private Peminjaman peminjaman;
+    private PengembalianDao dao;
+    private PeminjamanDao peminjamanDao;
+    private AnggotaDao anggotaDao;
+    private BukuDao bukuDao;
 
-    FormPengembalian formPengembalian;
-    Pengembalian pengembalian;
-    AnggotaDao anggotaDao;
-    BukuDao bukuDao;
-    PeminjamanDao peminjamanDao;
-    PengembalianDao pengembalianDao;
-    Peminjaman peminjaman;
     public PengembalianController(FormPengembalian formPengembalian) {
         this.formPengembalian = formPengembalian;
+        dao = new PengembalianDao();
+        peminjamanDao = new PeminjamanDao();
         anggotaDao = new AnggotaDao();
         bukuDao = new BukuDao();
-        peminjamanDao = new PeminjamanDao();
-        pengembalianDao = new PengembalianDao();
     }
 
-    public void bersihForm() {
-        isiCboAnggota();
-        isiCboBuku();
-        formPengembalian.getTxtTglPinjam().setText("");
-        formPengembalian.getTxtTglKembali().setText("");
-        formPengembalian.getTxtTglDikembalikan().setText("");
-        formPengembalian.getTxtTerlambat().setText("");
-        formPengembalian.getTxtDenda().setText("");
+    public void clearScreen() {
+        anggotaCodeOption();
+        bukuCodeOption();
+        formPengembalian.getFieldTglPinjam().setText("");
+        formPengembalian.getFieldTglKembali().setText("");
+        formPengembalian.getFieldTgldikembalikan().setText("");
+        formPengembalian.getFieldTerlambat().setText("");
+        formPengembalian.getFieldDenda().setText("");
     }
 
-    private void isiCboAnggota() {
+    public void insert() {
         try {
-            List<Anggota> anggotaList = anggotaDao.getAllAnggota();
-            formPengembalian.getCboAnggota().removeAllItems();
-            for (Anggota anggota : anggotaList) {
-                formPengembalian.getCboAnggota().
-                        addItem(anggota.getKode() + "-" + anggota.getNama());
+            pengembalian = new Pengembalian();
+
+            String kodeAnggota = formPengembalian.getOptionKodeAnggota()
+                    .getSelectedItem().toString().split("-")[0];
+            String kodeBuku = formPengembalian.getOptionKodeBuku()
+                    .getSelectedItem().toString();
+
+            Anggota anggota = anggotaDao.getAnggota(kodeAnggota);
+            Buku buku = bukuDao.getBuku(kodeBuku);
+
+            Peminjaman pinjam = new Peminjaman();
+
+            pinjam.setAnggota(anggota);
+            pinjam.setBuku(buku);
+            pinjam.setTglpinjam(formPengembalian.getFieldTglPinjam().getText());
+
+            pengembalian.setTglPinjam(pinjam);
+
+            pengembalian.setTgldikembalikan(formPengembalian.getFieldTgldikembalikan().getText());
+            pengembalian.setTerlambat(Integer.parseInt(formPengembalian.getFieldTerlambat().getText()));
+            pengembalian.setDenda((int) Long.parseLong(formPengembalian.getFieldDenda().getText()));
+
+            dao.insert(pengembalian);
+
+        } catch (Exception ex) {
+            Logger.getLogger(PeminjamanController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(formPengembalian, "Gagal menyimpan data: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+    
+    public void update() {
+        try {
+            int idPengembalian = Integer.parseInt(formPengembalian.getFieldId().getText());
+            pengembalian.setId(idPengembalian);
+            
+            
+            String kodeAnggota = formPengembalian.getOptionKodeAnggota()
+                    .getSelectedItem().toString().split("-")[0];
+            String kodeBuku = formPengembalian.getOptionKodeBuku()
+                    .getSelectedItem().toString();
+            
+            Anggota anggota = anggotaDao.getAnggota(kodeAnggota);
+            Buku buku = bukuDao.getBuku(kodeBuku);
+            
+            Peminjaman pinjam = new Peminjaman();
+            
+            pinjam.setAnggota(anggota);
+            pinjam.setBuku(buku);
+            pinjam.setTglpinjam(formPengembalian.getFieldTglPinjam().getText());
+
+            pengembalian.setTglPinjam(pinjam);
+
+            pengembalian.setTgldikembalikan(formPengembalian.getFieldTgldikembalikan().getText());
+            pengembalian.setTerlambat(Integer.parseInt(formPengembalian.getFieldTerlambat().getText()));
+            pengembalian.setDenda((int) Long.parseLong(formPengembalian.getFieldDenda().getText()));
+            
+            try {
+                dao.update(pengembalian);
+                JOptionPane.showMessageDialog(formPengembalian, "Update Data Ok!");
+            } catch (Exception ex) {
+                Logger.getLogger(PeminjamanController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (Exception ex) {
             Logger.getLogger(PeminjamanController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void isiCboBuku() {
+    public void delete() {
+        try {
+            String idPengembalian = formPengembalian.getFieldId().getText();
+
+            int id = Integer.parseInt(idPengembalian);
+            Pengembalian pengembalian = new Pengembalian();
+            pengembalian.setId(id);
+
+            if (pengembalian != null) {
+                dao.delete(pengembalian);
+            } else {
+                JOptionPane.showMessageDialog(formPengembalian, "Data Not Found");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PeminjamanController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void anggotaCodeOption() {
+        try {
+            List<Anggota> anggotaList = anggotaDao.getAllAnggota();
+            formPengembalian.getOptionKodeAnggota().removeAllItems();
+            for (Anggota anggota : anggotaList) {
+                formPengembalian.getOptionKodeAnggota().addItem(anggota.getKode() + "-" + anggota.getNama());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PeminjamanController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void bukuCodeOption() {
         try {
             List<Buku> bukuList = bukuDao.getAllBuku();
-            formPengembalian.getCboBuku().removeAllItems();
+            formPengembalian.getOptionKodeBuku().removeAllItems();
             for (Buku buku : bukuList) {
-                formPengembalian.getCboBuku().addItem(buku.getKode());
+                formPengembalian.getOptionKodeBuku().addItem(buku.getKode());
             }
         } catch (Exception ex) {
             Logger.getLogger(PeminjamanController.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,36 +165,88 @@ public class PengembalianController {
     }
 
     public void searchPinjam() {
-        String kodeanggota = formPengembalian.getCboAnggota()
+        String kodeAnggota = formPengembalian.getOptionKodeAnggota()
                 .getSelectedItem().toString().split("-")[0];
-        String kodebuku = formPengembalian.getCboBuku()
-                .getSelectedItem().toString();
-        String tglpinjam = formPengembalian.getTxtTglPinjam().getText();
-        try {
-            peminjaman = peminjamanDao.getPeminjaman(kodeanggota, kodebuku, tglpinjam);
-            if (peminjaman != null) {
-                formPengembalian.getTxtTglKembali().setText(peminjaman.getTglkembali());
-            } else {
-                JOptionPane.showMessageDialog(formPengembalian, "Data tidak ada");
-            }
+        String kodeBuku = formPengembalian.getOptionKodeBuku().getSelectedItem().toString();
+        String tglPinjam = formPengembalian.getFieldTglPinjam().getText();
 
+        try {
+            peminjaman = peminjamanDao.getPeminjaman(kodeAnggota, kodeBuku, tglPinjam);
+
+            if (peminjaman != null) {
+                formPengembalian.getFieldTglKembali().setText(peminjaman.getTglkembali());
+            } else {
+                JOptionPane.showMessageDialog(formPengembalian, "Data Not Found!!");
+            }
         } catch (Exception ex) {
-            Logger.getLogger(PeminjamanController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PengembalianController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void proses(){
-       String tglkembali = formPengembalian.getTxtTglKembali().getText();
-       String tglDikembalikan = formPengembalian.getTxtTglDikembalikan().getText();
+
+    public void searchPengembalian() {
+        int idPengembalian = Integer.parseInt(formPengembalian.getFieldId().getText());
+
         try {
-            int hasil = pengembalianDao.getKurangTanggal(tglDikembalikan, tglkembali);
+            pengembalian = dao.getPengembalian(idPengembalian);
+
+            if (pengembalian != null) {
+                formPengembalian.getOptionKodeAnggota().setSelectedItem(
+                        pengembalian.getPeminjaman().getAnggota().getKode() + "-" + 
+                                pengembalian.getPeminjaman().getAnggota().getNama()
+                );
+                formPengembalian.getOptionKodeBuku().setSelectedItem(
+                        pengembalian.getPeminjaman().getBuku().getKode()
+                );
+                formPengembalian.getFieldTglPinjam().setText(pengembalian.getPeminjaman().getTglpinjam());
+                formPengembalian.getFieldTglKembali().setText(pengembalian.getPeminjaman().getTglkembali());
+                formPengembalian.getFieldTgldikembalikan().setText(pengembalian.getTgldikembalikan());
+                formPengembalian.getFieldTerlambat().setText(String.valueOf(pengembalian.getTerlambat()));
+                formPengembalian.getFieldDenda().setText(String.valueOf(pengembalian.getDenda()));
+            } else {
+                JOptionPane.showMessageDialog(formPengembalian, "Data Not Found");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PengembalianController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void proses() {
+        String tglKembali = formPengembalian.getFieldTglKembali().getText();
+        String tglDikembalikan = formPengembalian.getFieldTgldikembalikan().getText();
+
+        try {
+            int hasil = dao.getKurangTanggal(tglDikembalikan, tglKembali);
+
             pengembalian = new Pengembalian();
-            pengembalian.setPeminjaman(peminjaman); 
+            pengembalian.setTglPinjam(peminjaman);
             pengembalian.setTerlambat(hasil);
             pengembalian.setDenda(pengembalian.getDenda());
-            formPengembalian.getTxtTerlambat().setText(""+hasil);
-            formPengembalian.getTxtDenda().setText(""+pengembalian.getDenda());
-            
+            formPengembalian.getFieldTerlambat().setText("" + hasil);
+            formPengembalian.getFieldDenda().setText("" + pengembalian.getDenda());
+        } catch (Exception ex) {
+            Logger.getLogger(PengembalianController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void viewData() {
+
+        try {
+            DefaultTableModel model = (DefaultTableModel) formPengembalian.getTabelPengembalian().getModel();
+
+            model.setNumRows(0);
+            List<Pengembalian> list = dao.getAll();
+            for (Pengembalian pengembalian : list) {
+                Object[] data = {
+                    pengembalian.getPeminjaman().getAnggota().getNama(),
+                    pengembalian.getPeminjaman().getBuku().getJudul(),
+                    pengembalian.getPeminjaman().getTglpinjam(),
+                    pengembalian.getPeminjaman().getTglkembali(),
+                    pengembalian.getTgldikembalikan(),
+                    pengembalian.getTerlambat(),
+                    pengembalian.getDenda()
+                };
+                model.addRow(data);
+            }
         } catch (Exception ex) {
             Logger.getLogger(PengembalianController.class.getName()).log(Level.SEVERE, null, ex);
         }
